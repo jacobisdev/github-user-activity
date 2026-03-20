@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import fetchJSON from "./utils/fetchJSON"
+
 const args = process.argv.slice(2)
 const username = args[0]
 
@@ -8,20 +10,7 @@ if (args.length !== 1) {
 }
 
 // Github API Base URL: 'https://api.github.com/'
-const reposEndpoint = `https://api.github.com/users/${username}/events`
+const userEndpoint = `https://api.github.com/users/${username}/events`
 
-const fetchJSON = async (url) => {
-	try {
-		const response = await fetch(url)
-		if (!response.ok) {
-			throw new Error(`Response status: ${response.status}`)
-		}
-		return await response.json()
-	} catch (error) {
-		console.error(error.message)
-	}
-}
-
-const userData = await fetchJSON(reposEndpoint)
+const userData = await fetchJSON(userEndpoint)
 console.log(userData)
-
