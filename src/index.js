@@ -7,6 +7,21 @@ if (args.length !== 1) {
 	process.exit(1)
 }
 
-const githubApiUrl = 'https://api.github.com/'
+// Github API Base URL: 'https://api.github.com/'
+const reposEndpoint = `https://api.github.com/users/${username}/events`
 
-const reposEndpoint = `${githubApiUrl}/repos/${username}/events`
+const fetchJSON = async (url) => {
+	try {
+		const response = await fetch(url)
+		if (!response.ok) {
+			throw new Error(`Response status: ${response.status}`)
+		}
+		return await response.json()
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
+const userData = await fetchJSON(reposEndpoint)
+console.log(userData)
+
