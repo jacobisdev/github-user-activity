@@ -13,37 +13,24 @@ if (args.length !== 1) {
 const userEndpoint = `https://api.github.com/users/${username}/events`
 
 const userData = await fetchJSON(userEndpoint)
+
+console.log('Output:')
 // console.log(userData)
 
-// console.log('Output:')
-
 class Event {
-	constructor(type) {
+	constructor(type, repo, action) {
 		this.type = type
-		this.count = 0
-	}
-
-	increment() {
-		this.count++
+		this.repo = repo
+		this.action = action
 	}
 }
 
-const userEvents = [...new Set(userData.map((e) => e.type))]
+const userEvents = []
 
-// userData.forEach((event) => {
-// 	if (!userEvents.some((e) => e.type === event.type)) {
-// 		userEvents.push(new Event(event.type))
-// 		return
-// 	}
-// 	userEvents.find((e) => e.type === event.type).increment()
-// })
+userData.forEach((event) => {
+	userEvents.push(new Event(event.type, event.repo.name, event.payload.action))
+})
 
-// userData.forEach((event) => {
-// 	userEvents.push()
-// })
-
-console.log(userEvents)
-
-// userEvents.forEach((event) => {
-// 	console.log(event.type, event.count)
-// })
+userEvents.forEach((event) => {
+	console.log(event)
+})
