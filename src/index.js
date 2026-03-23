@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { Event } from './constants.js'
 import { fetchJSON } from './utils.js'
 
 const args = process.argv.slice(2)
@@ -16,14 +17,6 @@ const userData = await fetchJSON(userEndpoint)
 
 console.log('Output:')
 // console.log(userData)
-
-class Event {
-	constructor(type, repo, action) {
-		this.type = type
-		this.repo = repo
-		this.action = action
-	}
-}
 
 const userEvents = []
 
