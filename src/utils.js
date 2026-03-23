@@ -1,4 +1,4 @@
-export default async (url) => {
+export const fetchJSON = async (url) => {
 	try {
 		const response = await fetch(url)
 		if (!response.ok) {

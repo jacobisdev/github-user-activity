@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import fetchJSON from './utils/fetchJSON.js'
+import { fetchJSON } from './utils.js'
 
 const args = process.argv.slice(2)
 const username = args[0]
