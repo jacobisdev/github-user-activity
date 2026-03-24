@@ -2,10 +2,19 @@ export const fetchJSON = async (url) => {
 	try {
 		const response = await fetch(url)
 		if (!response.ok) {
-			if (response.status === 404) {
-				throw new Error(`User doesn't exists`)
+			let message = ''
+			switch (response.status) {
+				case 404:
+					message = `The user does not exist`
+					break
+				case 403:
+					message = 'The server is not responding'
+					break
+				default:
+					message = `Response status: ${response.status}`
+					break
 			}
-			throw new Error(`Response status: ${response.status}`)
+			throw new Error(message)
 		}
 		return await response.json()
 	} catch (error) {

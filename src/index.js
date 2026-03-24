@@ -27,3 +27,5 @@ userData.forEach((event) => {
 userEvents.forEach((event) => {
 	console.log(event)
 })
+
+// TODO: First group the events, then work on the print logic
