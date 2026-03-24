@@ -2,6 +2,7 @@
 import { Event } from './constants.js'
 import { fetchJSON, getEventMessage } from './utils.js'
 
+// Handle user input
 const args = process.argv.slice(2)
 const username = args[0]
 
@@ -20,8 +21,8 @@ if (userData.length === 0) {
 	process.exit(1)
 }
 
+// Retrieve fields of interest from the raw data
 const userEvents = []
-
 userData.forEach((event) => {
 	userEvents.push(
 		new Event(
@@ -33,8 +34,8 @@ userData.forEach((event) => {
 	)
 })
 
+// Wrap and count similar events into one unique event
 const groupedEvents = {}
-
 userEvents.forEach((event) => {
 	const key = `${event.type}|${event.repo}|${event.action ?? ''}|${event.ref_type ?? ''}`
 
@@ -43,6 +44,7 @@ userEvents.forEach((event) => {
 
 console.log('Output:')
 
+// Format the data and print it on the terminal
 for (const key in groupedEvents) {
 	const splittedKey = key.split('|')
 

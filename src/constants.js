@@ -9,6 +9,7 @@ export class Event {
 	}
 }
 
+// Diferentiate between each event into singular and plural messages
 export const eventMessages = {
 	CommitCommentEvent: (repo, action, count) => {
 		switch (count) {

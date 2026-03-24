@@ -1,6 +1,7 @@
 import { eventMessages } from './constants.js'
 import { getErrorMessage } from './helpers.js'
 
+// Fetch data from GitHub API
 export const fetchJSON = async (url) => {
 	try {
 		const response = await fetch(url)
@@ -14,6 +15,7 @@ export const fetchJSON = async (url) => {
 	}
 }
 
+// Get the message for each specific event
 export const getEventMessage = (event, repo, action, ref_type, count) => {
 	let message = ''
 	if (action) {
