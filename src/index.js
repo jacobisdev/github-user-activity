@@ -15,17 +15,34 @@ const userEndpoint = `https://api.github.com/users/${username}/events`
 
 const userData = await fetchJSON(userEndpoint)
 
+if (userData.length === 0) {
+	console.log('The user has no recent events')
+	process.exit(1)
+}
+
 console.log('Output:')
 // console.log(userData)
 
 const userEvents = []
 
 userData.forEach((event) => {
-	userEvents.push(new Event(event.type, event.repo.name, event.payload.action))
-})
-
-userEvents.forEach((event) => {
-	console.log(event)
+	userEvents.push(
+		new Event(
+			event.type,
+			event.repo.name,
+			event.payload.action,
+			event.payload.ref_type,
+		),
+	)
 })
 
 // TODO: First group the events, then work on the print logic
+const groupedEvents = {}
+
+userEvents.forEach((event) => {
+	const key = `${event.type}|${event.repo}|${event.action ?? ''}|${event.ref_type ?? ''}`
+
+	groupedEvents[key] = (groupedEvents[key] || 0) + 1
+})
+
+console.log(groupedEvents)

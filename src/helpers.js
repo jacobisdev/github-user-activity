@@ -9,6 +9,6 @@ export const getErrorMessage = (status) => {
 		case 403:
 			return 'The server is not responding'
 		default:
-			return `Response status: ${status}`
+			return `Error fetching data: ${status}`
 	}
 }
