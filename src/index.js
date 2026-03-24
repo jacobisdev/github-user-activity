@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { Event } from './constants.js'
+import { Event, eventMessages } from './constants.js'
 import { fetchJSON } from './utils.js'
 
 const args = process.argv.slice(2)
@@ -45,4 +45,23 @@ userEvents.forEach((event) => {
 	groupedEvents[key] = (groupedEvents[key] || 0) + 1
 })
 
-console.log(groupedEvents)
+for (const key in groupedEvents) {
+	const splittedKey = key.split('|')
+
+	const event = splittedKey[0]
+	const repo = splittedKey[1]
+	const action = splittedKey[2]
+	const ref_type = splittedKey[3]
+
+	const count = groupedEvents[key]
+
+	if (action) {
+		console.log(event, repo, action, count)
+	} else if (ref_type) {
+		console.log(event, repo, ref_type, count)
+	} else {
+		console.log(event, repo, count)
+	}
+}
+
+// console.log(groupedEvents)
