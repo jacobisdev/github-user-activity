@@ -43,15 +43,13 @@ You can uninstall the package with the following command:
 npm remove -g github-user-activity
 ```
 
-You
-
 ## Usage
 Once installed and linked, you can run the CLI tool using the github-activity command followed by a valid GitHub username.
 
 ```bash
 github-activity <username>
 
-# Alternatively, if you didn't link it
+# Alternatively, if you didn't link it:
 node src/index.js jacobisdev
 ```
 
