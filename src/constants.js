@@ -10,76 +10,117 @@ export class Event {
 }
 
 export const eventMessages = {
-	PushEvent: (count, repo) => {
+	CommitCommentEvent: (repo, action, count) => {
 		switch (count) {
 			case 1:
-				return `Pushed 1 commit to ${repo}`
+				return `${capitalize(action)} a commit comment in ${repo}`
 			default:
-				return `Pushed ${count} commits to ${repo}`
+				return `${capitalize(action)} ${count} commit comments in ${repo}`
 		}
 	},
-	CreateEvent: (count, repo, ref_type) => {
+	CreateEvent: (repo, ref_type, count) => {
 		switch (count) {
 			case 1:
-				return `Created 1 ${ref_type} in ${repo}`
+				return `Created a ${ref_type} in ${repo}`
 			default:
 				return `Created ${count} ${ref_type}s in ${repo}`
 		}
 	},
-	DeleteEvent: (count, repo, ref_type) => {
+	DeleteEvent: (repo, ref_type, count) => {
 		switch (count) {
 			case 1:
-				return `Deleted 1 ${ref_type} in ${repo}`
+				return `Deleted a ${ref_type} in ${repo}`
 			default:
 				return `Deleted ${count} ${ref_type}s in ${repo}`
 		}
 	},
-	IssuesEvent: (count, repo, action) => {
+	DiscussionEvent: (repo, action, count) => {
 		switch (count) {
 			case 1:
-				return `${capitalize(action)} 1 issue in ${repo}`
+				return `${capitalize(action)} a discussion in ${repo}`
 			default:
-				return `${capitalize(action)} ${count} issues in ${repo}`
+				return `${capitalize(action)} ${count} discussions in ${repo}`
 		}
 	},
-	PullRequestEvent: (count, repo, action) => {
+	ForkEvent: (repo, count) => {
 		switch (count) {
 			case 1:
-				return `${capitalize(action)} 1 pull request in ${repo}`
-			default:
-				return `${capitalize(action)} ${count} pull requests in ${repo}`
-		}
-	},
-	IssueCommentEvent: (count, repo, action) => {
-		switch (count) {
-			case 1:
-				return `${capitalize(action)} 1 issue comment in ${repo}`
-			default:
-				return `${capitalize(action)} ${count} issue comments in ${repo}`
-		}
-	},
-	WatchEvent: (count, repo, action) => {
-		switch (count) {
-			case 1:
-				return `${capitalize(action)} watching ${repo}`
-			default:
-				return `${capitalize(action)} watching ${repo} ${count} times`
-		}
-	},
-	ForkEvent: (count, repo) => {
-		switch (count) {
-			case 1:
-				return `Forked ${repo} 1 time`
+				return `Forked ${repo}`
 			default:
 				return `Forked ${repo} ${count} times`
 		}
 	},
-	ReleaseEvent: (count, repo, action) => {
+	GollumEvent: (repo) => {
+		return `Created or edited a wiki in${repo}`
+	},
+	IssueCommentEvent: (repo, action, count) => {
 		switch (count) {
 			case 1:
-				return `${capitalize(action)} 1 release in ${repo}`
+				return `${capitalize(action)} an issue comment in ${repo}`
+			default:
+				return `${capitalize(action)} ${count} issue comments in ${repo}`
+		}
+	},
+	IssuesEvent: (repo, action, count) => {
+		switch (count) {
+			case 1:
+				return `${capitalize(action)} an issue in ${repo}`
+			default:
+				return `${capitalize(action)} ${count} issues in ${repo}`
+		}
+	},
+	MemberEvent: (repo, action, count) => {
+		switch (count) {
+			case 1:
+				return `${capitalize(action)} a member in ${repo}`
+			default:
+				return `${capitalize(action)} ${count} members in ${repo}`
+		}
+	},
+	PublicEvent: (repo) => {
+		return `Made public ${repo}`
+	},
+	PullRequestEvent: (repo, action, count) => {
+		switch (count) {
+			case 1:
+				return `${capitalize(action)} a pull request in ${repo}`
+			default:
+				return `${capitalize(action)} ${count} pull requests in ${repo}`
+		}
+	},
+	PullRequestReviewEvent: (repo, action, count) => {
+		switch (count) {
+			case 1:
+				return `${capitalize(action)} a pull request review in ${repo}`
+			default:
+				return `${capitalize(action)} ${count} pull request reviews in ${repo}`
+		}
+	},
+	PullRequestReviewCommentEvent: (repo, action, count) => {
+		switch (count) {
+			case 1:
+				return `${capitalize(action)} a pull request review comment in ${repo}`
+			default:
+				return `${capitalize(action)} ${count} pull request review comments in ${repo}`
+		}
+	},
+	PushEvent: (repo, count) => {
+		switch (count) {
+			case 1:
+				return `Pushed a commit to ${repo}`
+			default:
+				return `Pushed ${count} commits to ${repo}`
+		}
+	},
+	ReleaseEvent: (repo, action, count) => {
+		switch (count) {
+			case 1:
+				return `${capitalize(action)} a release in ${repo}`
 			default:
 				return `${capitalize(action)} ${count} releases in ${repo}`
 		}
+	},
+	WatchEvent: (repo) => {
+		return `Starred ${repo}`
 	},
 }

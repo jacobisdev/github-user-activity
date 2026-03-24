@@ -14,14 +14,14 @@ export const fetchJSON = async (url) => {
 	}
 }
 
-export const getEventMessage = (count, event, repo, action, ref_type) => {
+export const getEventMessage = (event, repo, action, ref_type, count) => {
 	let message = ''
 	if (action) {
-		message = eventMessages[event](count, repo, action)
+		message = eventMessages[event](repo, action, count)
 	} else if (ref_type) {
-		message = eventMessages[event](count, repo, ref_type)
+		message = eventMessages[event](repo, ref_type, count)
 	} else {
-		message = eventMessages[event](count, repo)
+		message = eventMessages[event](repo, count)
 	}
 	return message
 }

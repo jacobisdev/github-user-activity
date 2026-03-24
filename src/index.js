@@ -53,6 +53,6 @@ for (const key in groupedEvents) {
 
 	const count = groupedEvents[key]
 
-	const message = `~ ${getEventMessage(count, event, repo, action, ref_type)}`
+	const message = `~ ${getEventMessage(event, repo, action, ref_type, count)}`
 	console.log(message)
 }
