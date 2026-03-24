@@ -1,3 +1,4 @@
+import { eventMessages } from './constants.js'
 import { getErrorMessage } from './helpers.js'
 
 export const fetchJSON = async (url) => {
@@ -11,4 +12,16 @@ export const fetchJSON = async (url) => {
 		console.error(error.message)
 		process.exit(1)
 	}
+}
+
+export const getEventMessage = (count, event, repo, action, ref_type) => {
+	let message = ''
+	if (action) {
+		message = eventMessages[event](count, repo, action)
+	} else if (ref_type) {
+		message = eventMessages[event](count, repo, ref_type)
+	} else {
+		message = eventMessages[event](count, repo)
+	}
+	return message
 }

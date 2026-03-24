@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import { Event, eventMessages } from './constants.js'
-import { fetchJSON } from './utils.js'
+import { Event } from './constants.js'
+import { fetchJSON, getEventMessage } from './utils.js'
 
 const args = process.argv.slice(2)
 const username = args[0]
@@ -20,9 +20,6 @@ if (userData.length === 0) {
 	process.exit(1)
 }
 
-console.log('Output:')
-// console.log(userData)
-
 const userEvents = []
 
 userData.forEach((event) => {
@@ -36,7 +33,6 @@ userData.forEach((event) => {
 	)
 })
 
-// TODO: First group the events, then work on the print logic
 const groupedEvents = {}
 
 userEvents.forEach((event) => {
@@ -44,6 +40,8 @@ userEvents.forEach((event) => {
 
 	groupedEvents[key] = (groupedEvents[key] || 0) + 1
 })
+
+console.log('Output:')
 
 for (const key in groupedEvents) {
 	const splittedKey = key.split('|')
@@ -55,13 +53,6 @@ for (const key in groupedEvents) {
 
 	const count = groupedEvents[key]
 
-	if (action) {
-		console.log(event, repo, action, count)
-	} else if (ref_type) {
-		console.log(event, repo, ref_type, count)
-	} else {
-		console.log(event, repo, count)
-	}
+	const message = `~ ${getEventMessage(count, event, repo, action, ref_type)}`
+	console.log(message)
 }
-
-// console.log(groupedEvents)
